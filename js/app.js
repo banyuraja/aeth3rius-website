@@ -73,6 +73,7 @@
   const orderModal = document.getElementById("order-modal");
   const modalCloseBtn = document.getElementById("modal-close");
   const modalEyebrow = document.getElementById("modal-eyebrow");
+  const modalBestsellerPill = document.getElementById("modal-bestseller-pill");
   const modalTitle = document.getElementById("modal-title");
   const modalPreview = document.getElementById("modal-product-preview");
   const modalDirectPrice = document.getElementById("modal-direct-price");
@@ -297,7 +298,7 @@
       let currentCardSlide = 0;
 
       const card = document.createElement("article");
-      card.className = "grip-card";
+      card.className = `grip-card${product.isBestSeller ? " grip-card--bestseller" : ""}`;
 
       // Semantic Body Trigger (created ahead so tapping a slide can pass focus back to it)
       const bodyTrigger = document.createElement("button");
@@ -424,10 +425,22 @@
       const metaRow = document.createElement("div");
       metaRow.className = "grip-meta-row";
 
+      const metaLeftGroup = document.createElement("span");
+      metaLeftGroup.className = "grip-meta-left";
+
       const metaLeft = document.createElement("span");
       metaLeft.className = `grip-meta-tag${product.isSpecial ? " grip-meta-tag--special" : ""}`;
       metaLeft.textContent = `${product.index} · ${product.badge[currentLang]}`;
-      metaRow.appendChild(metaLeft);
+      metaLeftGroup.appendChild(metaLeft);
+
+      if (product.isBestSeller) {
+        const bestPill = document.createElement("span");
+        bestPill.className = "bestseller-pill";
+        bestPill.textContent = dict.bestSellerTag;
+        metaLeftGroup.appendChild(bestPill);
+      }
+
+      metaRow.appendChild(metaLeftGroup);
 
       if (images.length > 1) {
         const photoCount = document.createElement("span");
@@ -731,6 +744,13 @@
     modalEyebrow.textContent = `${dict.modalEyebrowPrefix} ${product.index} · ${product.badge[currentLang]}`;
     modalTitle.textContent = product.name;
 
+    const isBestSeller = Boolean(product.isBestSeller);
+    orderModal.classList.toggle("order-modal--bestseller", isBestSeller);
+    if (modalBestsellerPill) {
+      modalBestsellerPill.textContent = dict.bestSellerTag;
+      modalBestsellerPill.hidden = !isBestSeller;
+    }
+
     renderModalPreview(product);
 
     modalDirectPrice.textContent = formatIDR(product.directPrice);
@@ -871,6 +891,7 @@
       activeModalCounter = null;
       activeModalThumbBtns = [];
       activeModalImagesCount = 0;
+      orderModal.classList.remove("order-modal--bestseller");
       if (lastTriggerEl && typeof lastTriggerEl.focus === "function") {
         lastTriggerEl.focus();
       }

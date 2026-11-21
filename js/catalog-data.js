@@ -46,6 +46,7 @@ window.AETH3RIUS.GRIP_CATALOG = [
       id: "Full Length",
       en: "Full Length",
     },
+    isBestSeller: true,
     isSpecial: false,
     images: [
       "assets/products/vertexgrips/VertexGrips-1.jpg",
