@@ -684,8 +684,17 @@ footer[id] {
   color: var(--accent-special);
 }
 
+.grip-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .grip-photo-count {
   color: var(--accent-direct);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .grip-name {

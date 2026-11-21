@@ -425,22 +425,10 @@
       const metaRow = document.createElement("div");
       metaRow.className = "grip-meta-row";
 
-      const metaLeftGroup = document.createElement("span");
-      metaLeftGroup.className = "grip-meta-left";
-
       const metaLeft = document.createElement("span");
       metaLeft.className = `grip-meta-tag${product.isSpecial ? " grip-meta-tag--special" : ""}`;
       metaLeft.textContent = `${product.index} · ${product.badge[currentLang]}`;
-      metaLeftGroup.appendChild(metaLeft);
-
-      if (product.isBestSeller) {
-        const bestPill = document.createElement("span");
-        bestPill.className = "bestseller-pill";
-        bestPill.textContent = dict.bestSellerTag;
-        metaLeftGroup.appendChild(bestPill);
-      }
-
-      metaRow.appendChild(metaLeftGroup);
+      metaRow.appendChild(metaLeft);
 
       if (images.length > 1) {
         const photoCount = document.createElement("span");
@@ -449,15 +437,26 @@
         metaRow.appendChild(photoCount);
       }
 
+      const titleRow = document.createElement("div");
+      titleRow.className = "grip-title-row";
+
       const title = document.createElement("h3");
       title.className = "grip-name";
       title.textContent = product.name;
+      titleRow.appendChild(title);
+
+      if (product.isBestSeller) {
+        const bestPill = document.createElement("span");
+        bestPill.className = "bestseller-pill";
+        bestPill.textContent = dict.bestSellerTag;
+        titleRow.appendChild(bestPill);
+      }
 
       const summary = document.createElement("p");
       summary.className = "grip-summary";
       summary.textContent = product.summary[currentLang];
 
-      header.append(metaRow, title, summary);
+      header.append(metaRow, titleRow, summary);
 
       // Dual-Tier Price Stack
       const priceStack = document.createElement("div");
