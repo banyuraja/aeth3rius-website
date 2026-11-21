@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Aeth3rius Design Tokens — Clean Minimal Cycling Boutique
+   ========================================================================== */
+
+:root {
+  /* Palette */
+  --bg-canvas: #F8F7F4;
+  --bg-surface: #FFFFFF;
+  --bg-muted: #F0EEE9;
+  --bg-subtle-hover: #F4F2ED;
+
+  --border-subtle: #E4E1DA;
+  --border-strong: #C9C5BC;
+
+  --ink-primary: #141413;
+  --ink-secondary: #575550;
+  --ink-muted: #8C8982;
+  --ink-inverse: #F8F7F4;
+
+  /* Brand & Semantic Accents */
+  --accent-direct: #1E4D3B;
+  --accent-direct-hover: #173D2E;
+  --accent-direct-soft: #EAF2EE;
+  --accent-direct-border: #C4DCD0;
+
+  --accent-special: #A63429;
+  --accent-special-soft: #F9ECEA;
+
+  /* Platform Indicator Dots (Subtle Brand Signifiers) */
+  --dot-toco: #1E4D3B;
+  --dot-whatsapp: #25D366;
+  --dot-shopee: #EE4D2D;
+  --dot-tokopedia: #03AC0E;
+  --dot-tiktok: #141413;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Type Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: clamp(1.5rem, 2.5vw, 2rem);
+  --text-hero: clamp(2.15rem, 4.6vw, 3.6rem);
+
+  /* Spacing */
+  --container-max: 1200px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --section-space: clamp(3.5rem, 7vw, 6.25rem);
+
+  /* Radii (Architectural / Sharp Minimal) */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-pill: 999px;
+
+  /* Elevation & Motion */
+  --shadow-modal: 0 24px 64px -16px rgba(20, 20, 19, 0.22);
+  --shadow-toast: 0 12px 32px -8px rgba(20, 20, 19, 0.28);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 160ms;
+  --duration-base: 260ms;
+}
