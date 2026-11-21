@@ -24,17 +24,16 @@ window.AETH3RIUS.STORE_CONFIG = {
   // Optional: drop hero photo into assets/hero/hero.jpg and set path below
   heroImage: "assets/hero/hero.jpg",
 
-  // WhatsApp Business number in international format without "+" (e.g. "6281234567890")
-  // Leave empty "" while using placeholders; replace with your real number before launch.
-  whatsappNumber: "",
+  // WhatsApp Business number in international format without "+"
+  whatsappNumber: "6289665774307",
 
   // General storefront & social links (used in Footer & Concierge card)
   storeLinks: {
-    toco: "#",
-    shopee: "#",
-    tokopedia: "#",
-    tiktok: "#",
-    instagram: "#",
+    toco: "https://toco.id/store/theory808",
+    shopee: "https://shopee.co.id/theory808.fo",
+    tokopedia: "https://www.tokopedia.com/theory808",
+    tiktok: "https://vt.tiktok.com/ZS9PkrqhwcNFP-tHrWs/",
+    instagram: "https://www.instagram.com/aeth3rius",
   },
 };
 
@@ -67,10 +66,10 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Drop Bar Additional Grip · Full Profile · Fixed Gear",
     },
     channels: {
-      toco: "#",
-      shopee: "#",
-      tokopedia: "#",
-      tiktok: "#",
+      toco: "https://toco.id/link/rCtUYUM7RdVYtt7WinR51L",
+      shopee: "https://shopee.co.id/product/824709262/40452762456/",
+      tokopedia: "https://tk.tokopedia.com/ZSsJqWV43/",
+      tiktok: "https://vt.tiktok.com/ZS9PkrqhwcNFP-tHrWs/",
     },
   },
   {
@@ -101,10 +100,10 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Drop Bar Additional Grip · Contoured Full · Fixed Gear",
     },
     channels: {
-      toco: "#",
-      shopee: "#",
-      tokopedia: "#",
-      tiktok: "#",
+      toco: "https://toco.id/link/tZouHCcT1V5JVzYGTtxe9d",
+      shopee: "https://shopee.co.id/product/824709262/28084006335/",
+      tokopedia: "https://tk.tokopedia.com/ZSsJbLM9j/",
+      tiktok: "https://vt.tiktok.com/ZS9PkrqhwcNFP-tHrWs/",
     },
   },
   {
@@ -135,10 +134,10 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Drop Bar Additional Grip · Compact Angular · Fixed Gear",
     },
     channels: {
-      toco: "#",
-      shopee: "#",
-      tokopedia: "#",
-      tiktok: "#",
+      toco: "https://toco.id/link/2HaMShmNrSu987cZ3u7YaE",
+      shopee: "https://shopee.co.id/product/824709262/41714902133/",
+      tokopedia: "https://tk.tokopedia.com/ZSsJqs9a9/",
+      tiktok: "https://vt.tiktok.com/ZS9PkrqhwcNFP-tHrWs/",
     },
   },
   {
@@ -169,10 +168,10 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Drop Bar Additional Grip · Compact Contoured · Fixed Gear",
     },
     channels: {
-      toco: "#",
-      shopee: "#",
-      tokopedia: "#",
-      tiktok: "#",
+      toco: "https://toco.id/link/fLQy8i9P8smCb2uftpGFtr",
+      shopee: "https://shopee.co.id/product/824709262/44214897595/",
+      tokopedia: "https://tk.tokopedia.com/ZSsJbLDNC/",
+      tiktok: "https://vt.tiktok.com/ZS9PkrqhwcNFP-tHrWs/",
     },
   },
   {
@@ -198,10 +197,10 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Drop Bar Additional Grip · Signature Edition · Fixed Gear",
     },
     channels: {
-      toco: "#",
-      shopee: "#",
-      tokopedia: "#",
-      tiktok: "#",
+      toco: "https://toco.id/store/theory808",
+      shopee: "https://shopee.co.id/product/824709262/40218568286/",
+      tokopedia: "https://tk.tokopedia.com/ZSsJbRwMC/",
+      tiktok: "https://vt.tiktok.com/ZS9PkrqhwcNFP-tHrWs/",
     },
   },
 ];
