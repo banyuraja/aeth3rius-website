@@ -56,8 +56,8 @@ window.AETH3RIUS.GRIP_CATALOG = [
       "assets/products/vertexgrips/VertexGrips-5.jpg",
     ],
     illustration: "vertex",
-    directPrice: 125000,      // Lower price on Toco & WhatsApp Business (IDR)
-    marketplacePrice: 145000, // Standard price on Shopee, Tokopedia, TikTok Shop (IDR)
+    directPrice: 115000,      // Lower price on Toco & WhatsApp Business (IDR)
+    marketplacePrice: 135000, // Standard price on Shopee, Tokopedia, TikTok Shop (IDR)
     summary: {
       id: "Profil full-length dengan sudut tegas untuk kontrol ekstra saat sprint dan skid di drop bar.",
       en: "Full-length angular profile built for locked-in leverage during sprints and skids on drop bars.",
@@ -90,8 +90,8 @@ window.AETH3RIUS.GRIP_CATALOG = [
       "assets/products/apexgrips/ApexGrips5.jpg",
     ],
     illustration: "apex",
-    directPrice: 135000,
-    marketplacePrice: 155000,
+    directPrice: 115000,
+    marketplacePrice: 135000,
     summary: {
       id: "Kontur ergonomis full-length yang mengikuti telapak tangan untuk kenyamanan jarak jauh.",
       en: "Full-length contoured ergonomics shaped to follow natural palm pressure on longer rides.",
@@ -124,8 +124,8 @@ window.AETH3RIUS.GRIP_CATALOG = [
       "assets/products/shortvertexgrips/ShortVertexGrips5.jpg",
     ],
     illustration: "short-vertex",
-    directPrice: 105000,
-    marketplacePrice: 120000,
+    directPrice: 95000,
+    marketplacePrice: 115000,
     summary: {
       id: "Versi ringkas dari Vertex untuk tampilan kokpit bersih dan posisi tangan agresif.",
       en: "Compact edition of the Vertex for a minimal cockpit footprint and agile hand placement.",
@@ -158,8 +158,8 @@ window.AETH3RIUS.GRIP_CATALOG = [
       "assets/products/shortapexgrips/ShortApexGrips5.jpg",
     ],
     illustration: "short-apex",
-    directPrice: 115000,
-    marketplacePrice: 130000,
+    directPrice: 95000,
+    marketplacePrice: 115000,
     summary: {
       id: "Siluet pendek dengan kurva halus Apex—ringan, rapi, dan responsif di lalu lintas padat.",
       en: "Shortened silhouette with the signature Apex curve—light, tidy, and quick in city traffic.",
@@ -187,8 +187,8 @@ window.AETH3RIUS.GRIP_CATALOG = [
     // Drop photos in assets/products/devilgrips/ and add paths here when ready
     images: [],
     illustration: "devil",
-    directPrice: 150000,
-    marketplacePrice: 175000,
+    directPrice: 95000,
+    marketplacePrice: 115000,
     summary: {
       id: "Model signature berkarakter agresif dengan cengkeraman maksimal untuk gaya berkendara penuh presisi.",
       en: "Signature aggressive profile delivering maximum lock-in grip and unmistakable cockpit presence.",
