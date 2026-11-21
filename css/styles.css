@@ -663,10 +663,12 @@ footer[id] {
 .bestseller-pill {
   display: inline-flex;
   align-items: center;
-  padding: 0.14rem 0.45rem;
+  justify-content: center;
+  padding: 0.24rem 0.48rem;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.64rem;
   font-weight: 600;
+  line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-direct);
@@ -700,6 +702,7 @@ footer[id] {
 .grip-name {
   font-size: 1.15rem;
   font-weight: 600;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   color: var(--ink-primary);
 }
@@ -895,6 +898,10 @@ footer[id] {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.55rem;
+}
+
+.modal-eyebrow-row .eyebrow {
+  line-height: 1;
 }
 
 @starting-style {
