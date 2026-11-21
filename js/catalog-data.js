@@ -22,7 +22,7 @@ window.AETH3RIUS.STORE_CONFIG = {
   logo: "",
 
   // Optional: drop hero photo into assets/hero/hero.jpg and set path below
-  heroImage: "",
+  heroImage: "assets/hero/hero.jpg",
 
   // WhatsApp Business number in international format without "+" (e.g. "6281234567890")
   // Leave empty "" while using placeholders; replace with your real number before launch.

@@ -156,7 +156,9 @@
     const img = document.createElement("img");
     img.src = src.trim();
     img.alt = alt;
-    if (!eager) {
+    if (eager) {
+      img.fetchPriority = "high";
+    } else {
       img.loading = "lazy";
     }
     img.decoding = "async";
@@ -167,6 +169,9 @@
       img.remove();
     });
     container.appendChild(img);
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add("is-loaded");
+    }
   }
 
   function createChannelLinkElement({ name, sub, dotClass, href, isDirect, isWhatsApp }) {
