@@ -690,7 +690,13 @@ footer[id] {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
+}
+
+.grip-title-row .bestseller-pill {
+  padding: 0.2rem 0.46rem;
+  transform: translateY(1px);
 }
 
 .grip-photo-count {
