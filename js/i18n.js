@@ -23,7 +23,7 @@ window.AETH3RIUS.TRANSLATIONS = {
     heroPlaceholderTop: "AETH3RIUS · STUDIO",
     heroPlaceholderTag: "DROP BAR PROFILE",
     heroPlaceholderBottomLeft: "FIXED GEAR COCKPIT",
-    heroPlaceholderBottomRight: "5:4 EDITORIAL SLOT",
+    heroPlaceholderBottomRight: "1:1 EDITORIAL SLOT",
 
     pricingEyebrow: "TRANSPARANSI HARGA · IDR",
     pricingTitle: "Dua Pilihan Harga Sesuai Kenyamanan Belanja Anda",
@@ -101,7 +101,7 @@ window.AETH3RIUS.TRANSLATIONS = {
     heroPlaceholderTop: "AETH3RIUS · STUDIO",
     heroPlaceholderTag: "DROP BAR PROFILE",
     heroPlaceholderBottomLeft: "FIXED GEAR COCKPIT",
-    heroPlaceholderBottomRight: "5:4 EDITORIAL SLOT",
+    heroPlaceholderBottomRight: "1:1 EDITORIAL SLOT",
 
     pricingEyebrow: "PRICING STRUCTURE · IDR",
     pricingTitle: "Transparent Pricing Across Direct & Marketplace Channels",

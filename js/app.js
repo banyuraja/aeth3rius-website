@@ -275,7 +275,7 @@
       specLeft.textContent = product.name;
 
       const specRight = document.createElement("span");
-      specRight.textContent = "4:5";
+      specRight.textContent = "1:1";
 
       bottomBar.append(specLeft, specRight);
       placeholder.append(topBar, artWrap, bottomBar);

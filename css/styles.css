@@ -233,7 +233,10 @@ footer[id] {
 /* Hero Visual Frame */
 .hero-visual {
   position: relative;
-  aspect-ratio: 5 / 4;
+  width: 100%;
+  max-width: 500px;
+  justify-self: end;
+  aspect-ratio: 1 / 1;
   background: var(--bg-muted);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
@@ -493,7 +496,7 @@ footer[id] {
 .grip-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   background: var(--bg-muted);
   border-bottom: 1px solid var(--border-subtle);
   overflow: hidden;
@@ -1090,6 +1093,11 @@ footer[id] {
 @media (max-width: 980px) {
   .hero-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    justify-self: stretch;
+    max-width: 520px;
   }
 
   .hero-title {
