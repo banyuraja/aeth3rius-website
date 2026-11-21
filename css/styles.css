@@ -8,7 +8,7 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background-color: rgba(248, 247, 244, 0.9);
+  background-color: rgba(0, 0, 0, 0.86);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-subtle);
@@ -102,8 +102,8 @@
 }
 
 .lang-btn[aria-pressed="true"] {
-  background: var(--ink-primary);
-  color: var(--ink-inverse);
+  background: var(--accent-direct-btn);
+  color: #FFFFFF;
 }
 
 /* ---------- Editorial Hero ---------- */
@@ -173,12 +173,12 @@ footer[id] {
 }
 
 .btn-primary {
-  background: var(--ink-primary);
-  color: var(--ink-inverse);
+  background: var(--accent-direct-btn);
+  color: #FFFFFF;
 }
 
 .btn-primary:hover {
-  background: #2A2A27;
+  background: var(--accent-direct-hover);
 }
 
 .btn-secondary {
@@ -188,12 +188,12 @@ footer[id] {
 }
 
 .btn-secondary:hover {
-  border-color: var(--ink-primary);
+  border-color: var(--accent-direct);
   background: var(--bg-subtle-hover);
 }
 
 .btn-direct {
-  background: var(--accent-direct);
+  background: var(--accent-direct-btn);
   color: #FFFFFF;
 }
 
@@ -265,8 +265,8 @@ footer[id] {
   justify-content: space-between;
   padding: 1.25rem;
   background:
-    linear-gradient(to right, rgba(20, 20, 19, 0.035) 1px, transparent 1px) 0 0 / 28px 28px,
-    linear-gradient(to bottom, rgba(20, 20, 19, 0.035) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(to right, rgba(244, 247, 250, 0.04) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(to bottom, rgba(244, 247, 250, 0.04) 1px, transparent 1px) 0 0 / 28px 28px,
     var(--bg-muted);
 }
 
@@ -337,7 +337,7 @@ footer[id] {
 
 .tier-panel--direct {
   border-color: var(--accent-direct-border);
-  background: linear-gradient(180deg, #F4F9F6 0%, #FFFFFF 100%);
+  background: linear-gradient(180deg, rgba(46, 162, 230, 0.1) 0%, var(--bg-surface) 100%);
 }
 
 .tier-panel--direct::before {
@@ -478,7 +478,7 @@ footer[id] {
 }
 
 .grip-card:hover {
-  border-color: var(--ink-primary);
+  border-color: var(--accent-direct);
   transform: translateY(-2px);
 }
 
@@ -545,7 +545,7 @@ footer[id] {
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(0, 0, 0, 0.72);
   border: 1px solid var(--border-subtle);
   color: var(--ink-secondary);
   border-radius: var(--radius-xs);
@@ -553,7 +553,7 @@ footer[id] {
 
 .card-badge--special {
   background: var(--accent-special-soft);
-  border-color: rgba(166, 52, 41, 0.22);
+  border-color: rgba(224, 90, 79, 0.35);
   color: var(--accent-special);
 }
 
@@ -596,14 +596,16 @@ footer[id] {
 
 .price-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.35rem 0.65rem;
 }
 
 .price-label {
   font-size: var(--text-xs);
   color: var(--ink-muted);
+  white-space: nowrap;
 }
 
 .price-label--direct {
@@ -615,6 +617,7 @@ footer[id] {
   display: inline-flex;
   align-items: baseline;
   gap: 0.45rem;
+  margin-left: auto;
 }
 
 .price-direct {
@@ -623,6 +626,7 @@ footer[id] {
   font-weight: 600;
   color: var(--accent-direct);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .price-market {
@@ -630,6 +634,7 @@ footer[id] {
   font-size: 0.84rem;
   color: var(--ink-secondary);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .savings-tag {
@@ -642,6 +647,7 @@ footer[id] {
   background: var(--accent-direct-soft);
   color: var(--accent-direct);
   border-radius: var(--radius-xs);
+  white-space: nowrap;
 }
 
 .card-cta {
@@ -758,9 +764,9 @@ footer[id] {
 }
 
 .order-modal::backdrop {
-  background: rgba(20, 20, 19, 0.48);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .modal-header {
@@ -941,12 +947,12 @@ footer[id] {
 
 .channel-btn--direct {
   border-color: var(--accent-direct-border);
-  background: #FAFDFB;
+  background: rgba(46, 162, 230, 0.07);
 }
 
 .channel-btn--direct:hover {
   border-color: var(--accent-direct);
-  background: var(--accent-direct-soft);
+  background: rgba(46, 162, 230, 0.16);
 }
 
 .channel-btn-left {
@@ -1074,8 +1080,9 @@ footer[id] {
   pointer-events: none;
   max-width: min(92vw, 460px);
   padding: 0.8rem 1.15rem;
-  background: var(--ink-primary);
-  color: var(--ink-inverse);
+  background: var(--bg-muted);
+  color: var(--ink-primary);
+  border: 1px solid var(--accent-direct-border);
   font-size: var(--text-sm);
   border-radius: var(--radius-xs);
   box-shadow: var(--shadow-toast);

@@ -1,37 +1,40 @@
 /* ==========================================================================
-   Aeth3rius Design Tokens — Clean Minimal Cycling Boutique
+   Aeth3rius Design Tokens — Stealth Minimal Dark Mode (Pitch Black + Ocean Blue)
    ========================================================================== */
 
 :root {
-  /* Palette */
-  --bg-canvas: #F8F7F4;
-  --bg-surface: #FFFFFF;
-  --bg-muted: #F0EEE9;
-  --bg-subtle-hover: #F4F2ED;
+  color-scheme: dark;
 
-  --border-subtle: #E4E1DA;
-  --border-strong: #C9C5BC;
+  /* Core Dark Palette */
+  --bg-canvas: #000000;
+  --bg-surface: #0A0D10;
+  --bg-muted: #0E1318;
+  --bg-subtle-hover: #131A22;
 
-  --ink-primary: #141413;
-  --ink-secondary: #575550;
-  --ink-muted: #8C8982;
-  --ink-inverse: #F8F7F4;
+  --border-subtle: #1D252E;
+  --border-strong: #313E4C;
 
-  /* Brand & Semantic Accents */
-  --accent-direct: #1E4D3B;
-  --accent-direct-hover: #173D2E;
-  --accent-direct-soft: #EAF2EE;
-  --accent-direct-border: #C4DCD0;
+  --ink-primary: #F4F7FA;
+  --ink-secondary: #A6B2BE;
+  --ink-muted: #6F7D8B;
+  --ink-inverse: #000000;
 
-  --accent-special: #A63429;
-  --accent-special-soft: #F9ECEA;
+  /* Ocean Blue Accent & Semantic Accents */
+  --accent-direct: #2EA2E6;
+  --accent-direct-btn: #1277B5;
+  --accent-direct-hover: #1A8CD1;
+  --accent-direct-soft: rgba(46, 162, 230, 0.14);
+  --accent-direct-border: rgba(46, 162, 230, 0.36);
+
+  --accent-special: #E05A4F;
+  --accent-special-soft: rgba(224, 90, 79, 0.14);
 
   /* Platform Indicator Dots (Subtle Brand Signifiers) */
-  --dot-toco: #1E4D3B;
+  --dot-toco: #2EA2E6;
   --dot-whatsapp: #25D366;
-  --dot-shopee: #EE4D2D;
+  --dot-shopee: #FF5722;
   --dot-tokopedia: #03AC0E;
-  --dot-tiktok: #141413;
+  --dot-tiktok: #F4F7FA;
 
   /* Typography */
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -58,8 +61,8 @@
   --radius-pill: 999px;
 
   /* Elevation & Motion */
-  --shadow-modal: 0 24px 64px -16px rgba(20, 20, 19, 0.22);
-  --shadow-toast: 0 12px 32px -8px rgba(20, 20, 19, 0.28);
+  --shadow-modal: 0 28px 72px -12px rgba(0, 0, 0, 0.85);
+  --shadow-toast: 0 14px 36px -8px rgba(0, 0, 0, 0.85);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-fast: 160ms;
   --duration-base: 260ms;

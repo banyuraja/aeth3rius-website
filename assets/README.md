@@ -14,4 +14,4 @@ Drop your real brand logo and product photography into these folders, then point
 | `assets/products/` | `short-apex-grips.webp` (or `.jpg`) | `1:1` square studio shot |
 | `assets/products/` | `devil-grips.webp` (or `.jpg`) | `1:1` square studio shot |
 
-> **Tip for Clean Minimal Cycling Boutique Photography:** Shoot on a neutral light gray/off-white background or natural daylight studio setting so product cards blend seamlessly with the warm alabaster `#F8F7F4` canvas.
+> **Tip for Stealth Dark Mode Photography:** Shoot on a matte dark charcoal or pitch-black backdrop with crisp rim lighting so product cards blend seamlessly into the `#000000` dark theme.

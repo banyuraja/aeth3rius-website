@@ -65,7 +65,7 @@ ol {
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink-primary);
+  outline: 2px solid var(--accent-direct);
   outline-offset: 3px;
 }
 

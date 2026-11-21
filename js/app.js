@@ -22,41 +22,41 @@
   const ILLUSTRATIONS = {
     vertex: `
       <svg viewBox="0 0 220 180" fill="none" aria-hidden="true">
-        <path d="M36 52 H132 C164 52 178 72 178 98 C178 126 160 142 128 142 H98" stroke="currentColor" stroke-opacity="0.22" stroke-width="10" stroke-linecap="round"/>
-        <path d="M56 52 L118 52 L134 62 L134 74 L56 68 Z" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-        <line x1="56" y1="34" x2="134" y2="34" stroke="currentColor" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="3 3"/>
-        <circle cx="56" cy="34" r="2" fill="currentColor"/>
-        <circle cx="134" cy="34" r="2" fill="currentColor"/>
+        <path d="M36 52 H132 C164 52 178 72 178 98 C178 126 160 142 128 142 H98" stroke="currentColor" stroke-opacity="0.25" stroke-width="10" stroke-linecap="round"/>
+        <path d="M56 52 L118 52 L134 62 L134 74 L56 68 Z" fill="#2EA2E6" fill-opacity="0.16" stroke="#2EA2E6" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="56" y1="34" x2="134" y2="34" stroke="#2EA2E6" stroke-opacity="0.45" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="56" cy="34" r="2" fill="#2EA2E6"/>
+        <circle cx="134" cy="34" r="2" fill="#2EA2E6"/>
       </svg>
     `,
     apex: `
       <svg viewBox="0 0 220 180" fill="none" aria-hidden="true">
-        <path d="M36 52 H132 C164 52 178 72 178 98 C178 126 160 142 128 142 H98" stroke="currentColor" stroke-opacity="0.22" stroke-width="10" stroke-linecap="round"/>
-        <path d="M54 52 C78 44 110 44 136 58 C144 63 142 74 130 74 C104 72 78 68 54 66 Z" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M68 56 C92 52 112 54 128 62" stroke="currentColor" stroke-opacity="0.45" stroke-width="1.25" stroke-linecap="round"/>
+        <path d="M36 52 H132 C164 52 178 72 178 98 C178 126 160 142 128 142 H98" stroke="currentColor" stroke-opacity="0.25" stroke-width="10" stroke-linecap="round"/>
+        <path d="M54 52 C78 44 110 44 136 58 C144 63 142 74 130 74 C104 72 78 68 54 66 Z" fill="#2EA2E6" fill-opacity="0.16" stroke="#2EA2E6" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M68 56 C92 52 112 54 128 62" stroke="#2EA2E6" stroke-opacity="0.6" stroke-width="1.25" stroke-linecap="round"/>
       </svg>
     `,
     "short-vertex": `
       <svg viewBox="0 0 220 180" fill="none" aria-hidden="true">
-        <path d="M36 52 H132 C164 52 178 72 178 98 C178 126 160 142 128 142 H98" stroke="currentColor" stroke-opacity="0.22" stroke-width="10" stroke-linecap="round"/>
-        <path d="M84 52 L126 52 L138 62 L138 72 L84 66 Z" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-        <line x1="84" y1="34" x2="138" y2="34" stroke="currentColor" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="3 3"/>
-        <circle cx="84" cy="34" r="2" fill="currentColor"/>
-        <circle cx="138" cy="34" r="2" fill="currentColor"/>
+        <path d="M36 52 H132 C164 52 178 72 178 98 C178 126 160 142 128 142 H98" stroke="currentColor" stroke-opacity="0.25" stroke-width="10" stroke-linecap="round"/>
+        <path d="M84 52 L126 52 L138 62 L138 72 L84 66 Z" fill="#2EA2E6" fill-opacity="0.16" stroke="#2EA2E6" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="84" y1="34" x2="138" y2="34" stroke="#2EA2E6" stroke-opacity="0.45" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle cx="84" cy="34" r="2" fill="#2EA2E6"/>
+        <circle cx="138" cy="34" r="2" fill="#2EA2E6"/>
       </svg>
     `,
     "short-apex": `
       <svg viewBox="0 0 220 180" fill="none" aria-hidden="true">
-        <path d="M36 52 H132 C164 52 178 72 178 98 C178 126 160 142 128 142 H98" stroke="currentColor" stroke-opacity="0.22" stroke-width="10" stroke-linecap="round"/>
-        <path d="M82 52 C100 45 122 46 138 58 C144 63 141 72 131 72 C113 70 98 67 82 65 Z" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M92 56 C108 53 120 55 131 62" stroke="currentColor" stroke-opacity="0.45" stroke-width="1.25" stroke-linecap="round"/>
+        <path d="M36 52 H132 C164 52 178 72 178 98 C178 126 160 142 128 142 H98" stroke="currentColor" stroke-opacity="0.25" stroke-width="10" stroke-linecap="round"/>
+        <path d="M82 52 C100 45 122 46 138 58 C144 63 141 72 131 72 C113 70 98 67 82 65 Z" fill="#2EA2E6" fill-opacity="0.16" stroke="#2EA2E6" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M92 56 C108 53 120 55 131 62" stroke="#2EA2E6" stroke-opacity="0.6" stroke-width="1.25" stroke-linecap="round"/>
       </svg>
     `,
     devil: `
       <svg viewBox="0 0 220 180" fill="none" aria-hidden="true">
-        <path d="M36 56 H132 C164 56 178 76 178 102 C178 130 160 146 128 146 H98" stroke="currentColor" stroke-opacity="0.22" stroke-width="10" stroke-linecap="round"/>
-        <path d="M64 56 L108 52 L144 36 L136 62 L146 74 L64 70 Z" fill="#A63429" fill-opacity="0.12" stroke="#A63429" stroke-width="2" stroke-linejoin="round"/>
-        <circle cx="144" cy="36" r="2.5" fill="#A63429"/>
+        <path d="M36 56 H132 C164 56 178 76 178 102 C178 130 160 146 128 146 H98" stroke="currentColor" stroke-opacity="0.25" stroke-width="10" stroke-linecap="round"/>
+        <path d="M64 56 L108 52 L144 36 L136 62 L146 74 L64 70 Z" fill="#E05A4F" fill-opacity="0.18" stroke="#E05A4F" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="144" cy="36" r="2.5" fill="#E05A4F"/>
       </svg>
     `,
   };

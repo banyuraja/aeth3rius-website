@@ -34,17 +34,17 @@ Single-source reference for maintaining and evolving the **Aeth3rius** Drop Bar 
 
 ---
 
-## 3. Visual Direction — Clean Minimal Cycling Boutique
+## 3. Visual Direction — Stealth Minimal Dark Mode (Pitch Black + Ocean Blue)
 
-- **Aesthetic:** Bright, airy, editorial minimalism inspired by Rapha and Pas Normal Studios — generous whitespace, sharp hairline borders, photography-first cards, zero e-commerce clutter.
+- **Aesthetic:** Clean minimal cycling boutique rendered in stealth dark mode — pitch black canvas, subtle carbon-dark elevated surfaces, crisp hairline borders, generous whitespace, and ocean blue accents.
 - **Color Tokens (`css/tokens.css`):**
-  - Canvas: `#F8F7F4` (Warm Alabaster)
-  - Surface: `#FFFFFF` (Pure Crisp White)
-  - Subtle Band / Placeholder: `#F0EEE9` (Warm Stone)
-  - Hairline Border: `#E4E1DA`
-  - Primary Ink: `#141413` · Secondary Ink: `#575550` · Muted Ink: `#8C8982`
-  - Direct / Best-Price Accent: `#1E4D3B` (Deep Racing Green) with `#EAF2EE` soft tint
-  - Special Edition Accent: `#A63429` (Muted Track Crimson)
+  - Canvas: `#000000` (Pitch Black)
+  - Surface: `#0A0D10` (Carbon Obsidian)
+  - Subtle Band / Placeholder: `#0E1318` (Deep Slate Black)
+  - Hairline Border: `#1D252E` (Strong: `#313E4C`)
+  - Primary Ink: `#F4F7FA` · Secondary Ink: `#A6B2BE` · Muted Ink: `#6F7D8B`
+  - Ocean Blue Accent (Primary CTA & Direct / Best-Price): `#2EA2E6` (Button fill `#1277B5`, soft tint `rgba(46, 162, 230, 0.14)`)
+  - Special Edition Accent: `#E05A4F` (Luminous Track Crimson for Devil Grips)
 - **Typography:** `Plus Jakarta Sans` (editorial display & body) + `IBM Plex Mono` (catalog numbers `01`–`05`, IDR prices, spec tags).
 - **Shop Button Restraint:** Channel links live inside a clean Order Channel Modal (`<dialog>`) rather than crowding every product card. Buttons stay cohesive with monochrome surfaces and subtle brand accent indicators.
 
