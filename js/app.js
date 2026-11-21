@@ -14,6 +14,7 @@
 
   let currentLang = getSavedLanguage();
   let activeProductId = null;
+  let activeGalleryIndex = 0;
   let lastTriggerEl = null;
   let toastTimer = null;
 
@@ -69,9 +70,7 @@
   const modalCloseBtn = document.getElementById("modal-close");
   const modalEyebrow = document.getElementById("modal-eyebrow");
   const modalTitle = document.getElementById("modal-title");
-  const modalThumb = document.getElementById("modal-thumb");
-  const modalDesc = document.getElementById("modal-desc");
-  const modalSpecs = document.getElementById("modal-specs");
+  const modalPreview = document.getElementById("modal-product-preview");
   const modalDirectPrice = document.getElementById("modal-direct-price");
   const modalMarketPrice = document.getElementById("modal-market-price");
   const modalDirectList = document.getElementById("modal-direct-list");
@@ -82,6 +81,16 @@
 
   function t() {
     return TRANSLATIONS[currentLang];
+  }
+
+  function getProductImages(product) {
+    if (Array.isArray(product.images) && product.images.length > 0) {
+      return product.images.filter((src) => typeof src === "string" && src.trim() !== "");
+    }
+    if (typeof product.image === "string" && product.image.trim() !== "") {
+      return [product.image.trim()];
+    }
+    return [];
   }
 
   function isConfiguredUrl(url) {
@@ -234,6 +243,8 @@
     const dict = t();
 
     GRIP_CATALOG.forEach((product) => {
+      const images = getProductImages(product);
+      const hasImages = images.length > 0;
       const savings = Math.max(0, product.marketplacePrice - product.directPrice);
 
       const card = document.createElement("article");
@@ -247,7 +258,7 @@
 
       // Media Container
       const media = document.createElement("div");
-      media.className = "grip-media";
+      media.className = `grip-media${hasImages ? " grip-media--photo" : ""}`;
 
       const placeholder = document.createElement("div");
       placeholder.className = "studio-placeholder";
@@ -281,7 +292,9 @@
       placeholder.append(topBar, artWrap, bottomBar);
       media.appendChild(placeholder);
 
-      attachOptionalImage(media, product.image, product.name, false);
+      if (hasImages) {
+        attachOptionalImage(media, images[0], product.name, false);
+      }
 
       // Card Body
       const body = document.createElement("div");
@@ -289,6 +302,21 @@
 
       const header = document.createElement("div");
       header.className = "grip-header";
+
+      const metaRow = document.createElement("div");
+      metaRow.className = "grip-meta-row";
+
+      const metaLeft = document.createElement("span");
+      metaLeft.className = `grip-meta-tag${product.isSpecial ? " grip-meta-tag--special" : ""}`;
+      metaLeft.textContent = `${product.index} · ${product.badge[currentLang]}`;
+      metaRow.appendChild(metaLeft);
+
+      if (images.length > 1) {
+        const photoCount = document.createElement("span");
+        photoCount.className = "grip-photo-count";
+        photoCount.textContent = dict.photosLabel(images.length);
+        metaRow.appendChild(photoCount);
+      }
 
       const title = document.createElement("h3");
       title.className = "grip-name";
@@ -298,7 +326,7 @@
       summary.className = "grip-summary";
       summary.textContent = product.summary[currentLang];
 
-      header.append(title, summary);
+      header.append(metaRow, title, summary);
 
       // Dual-Tier Price Stack
       const priceStack = document.createElement("div");
@@ -415,22 +443,137 @@
 
   /* ---------- Order Channel Modal (<dialog>) ---------- */
 
+  function renderModalPreview(product) {
+    if (!modalPreview) return;
+    modalPreview.textContent = "";
+
+    const dict = t();
+    const images = getProductImages(product);
+
+    if (images.length > 0) {
+      modalPreview.className = "modal-gallery-block";
+      const safeIndex = Math.max(0, Math.min(activeGalleryIndex, images.length - 1));
+      activeGalleryIndex = safeIndex;
+
+      const stage = document.createElement("div");
+      stage.className = "modal-gallery-stage";
+
+      const mainImg = document.createElement("img");
+      mainImg.src = images[safeIndex];
+      mainImg.alt = `${product.name} — ${safeIndex + 1} / ${images.length}`;
+      mainImg.decoding = "async";
+      stage.appendChild(mainImg);
+
+      if (images.length > 1) {
+        const counter = document.createElement("span");
+        counter.className = "modal-gallery-counter";
+        counter.textContent = `${safeIndex + 1} / ${images.length}`;
+        stage.appendChild(counter);
+
+        const prevBtn = document.createElement("button");
+        prevBtn.type = "button";
+        prevBtn.className = "modal-gallery-nav modal-gallery-nav--prev";
+        prevBtn.setAttribute("aria-label", dict.prevPhoto);
+        prevBtn.textContent = "‹";
+        prevBtn.addEventListener("click", () => {
+          activeGalleryIndex = (activeGalleryIndex - 1 + images.length) % images.length;
+          renderModalPreview(product);
+        });
+
+        const nextBtn = document.createElement("button");
+        nextBtn.type = "button";
+        nextBtn.className = "modal-gallery-nav modal-gallery-nav--next";
+        nextBtn.setAttribute("aria-label", dict.nextPhoto);
+        nextBtn.textContent = "›";
+        nextBtn.addEventListener("click", () => {
+          activeGalleryIndex = (activeGalleryIndex + 1) % images.length;
+          renderModalPreview(product);
+        });
+
+        stage.append(prevBtn, nextBtn);
+      }
+
+      modalPreview.appendChild(stage);
+
+      if (images.length > 1) {
+        const thumbs = document.createElement("div");
+        thumbs.className = "modal-gallery-thumbs";
+
+        images.forEach((src, idx) => {
+          const thumbBtn = document.createElement("button");
+          thumbBtn.type = "button";
+          thumbBtn.className = `modal-thumb-btn${idx === safeIndex ? " is-active" : ""}`;
+          thumbBtn.setAttribute("aria-label", `${product.name} ${idx + 1}`);
+          thumbBtn.setAttribute("aria-pressed", String(idx === safeIndex));
+          thumbBtn.addEventListener("click", () => {
+            if (activeGalleryIndex !== idx) {
+              activeGalleryIndex = idx;
+              renderModalPreview(product);
+            }
+          });
+
+          const thumbImg = document.createElement("img");
+          thumbImg.src = src;
+          thumbImg.alt = "";
+          thumbImg.loading = "lazy";
+          thumbImg.decoding = "async";
+          thumbBtn.appendChild(thumbImg);
+          thumbs.appendChild(thumbBtn);
+        });
+
+        modalPreview.appendChild(thumbs);
+      }
+
+      const copyWrap = document.createElement("div");
+      copyWrap.className = "modal-preview-copy";
+
+      const desc = document.createElement("p");
+      desc.className = "modal-preview-desc";
+      desc.textContent = product.summary[currentLang];
+
+      const specs = document.createElement("p");
+      specs.className = "modal-preview-specs";
+      specs.textContent = product.specs[currentLang];
+
+      copyWrap.append(desc, specs);
+      modalPreview.appendChild(copyWrap);
+      return;
+    }
+
+    // Fallback compact preview for models without photos yet (e.g. Devil Grips)
+    modalPreview.className = "modal-product-preview";
+
+    const thumb = document.createElement("div");
+    thumb.className = "modal-thumb";
+    const svgWrap = document.createElement("div");
+    svgWrap.innerHTML = ILLUSTRATIONS[product.illustration] || ILLUSTRATIONS.vertex;
+    if (svgWrap.firstElementChild) {
+      thumb.appendChild(svgWrap.firstElementChild);
+    }
+
+    const copyWrap = document.createElement("div");
+    copyWrap.className = "modal-preview-copy";
+
+    const desc = document.createElement("p");
+    desc.className = "modal-preview-desc";
+    desc.textContent = product.summary[currentLang];
+
+    const specs = document.createElement("p");
+    specs.className = "modal-preview-specs";
+    specs.textContent = product.specs[currentLang];
+
+    copyWrap.append(desc, specs);
+    modalPreview.append(thumb, copyWrap);
+  }
+
   function renderOrderModalContent(product) {
     const dict = t();
     const savings = Math.max(0, product.marketplacePrice - product.directPrice);
 
     modalEyebrow.textContent = `${dict.modalEyebrowPrefix} ${product.index} · ${product.badge[currentLang]}`;
     modalTitle.textContent = product.name;
-    modalDesc.textContent = product.summary[currentLang];
-    modalSpecs.textContent = product.specs[currentLang];
 
-    modalThumb.textContent = "";
-    const svgWrap = document.createElement("div");
-    svgWrap.innerHTML = ILLUSTRATIONS[product.illustration] || ILLUSTRATIONS.vertex;
-    if (svgWrap.firstElementChild) {
-      modalThumb.appendChild(svgWrap.firstElementChild);
-    }
-    attachOptionalImage(modalThumb, product.image, product.name, true);
+    renderModalPreview(product);
 
     modalDirectPrice.textContent = formatIDR(product.directPrice);
     modalMarketPrice.textContent = formatIDR(product.marketplacePrice);
@@ -506,6 +649,7 @@
     if (!product || !orderModal) return;
 
     activeProductId = product.id;
+    activeGalleryIndex = 0;
     lastTriggerEl = triggerEl || null;
     renderOrderModalContent(product);
 
@@ -537,8 +681,24 @@
       }
     });
 
+    // Keyboard Left / Right gallery navigation while modal is open
+    orderModal.addEventListener("keydown", (event) => {
+      if (!activeProductId || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
+      const product = GRIP_CATALOG.find((item) => item.id === activeProductId);
+      if (!product) return;
+      const images = getProductImages(product);
+      if (images.length <= 1) return;
+      event.preventDefault();
+      activeGalleryIndex =
+        event.key === "ArrowRight"
+          ? (activeGalleryIndex + 1) % images.length
+          : (activeGalleryIndex - 1 + images.length) % images.length;
+      renderModalPreview(product);
+    });
+
     orderModal.addEventListener("close", () => {
       activeProductId = null;
+      activeGalleryIndex = 0;
       if (lastTriggerEl && typeof lastTriggerEl.focus === "function") {
         lastTriggerEl.focus();
       }

@@ -44,6 +44,9 @@ window.AETH3RIUS.TRANSLATIONS = {
     priceMarketLabel: "Shopee · Tokopedia · TikTok",
     savePrefix: "Hemat",
     cardCta: "Pilih Toko & Order",
+    photosLabel: (n) => `${n} Foto`,
+    prevPhoto: "Foto sebelumnya",
+    nextPhoto: "Foto berikutnya",
 
     conciergeEyebrow: "DIRECT CONCIERGE",
     conciergeTitle: "Bingung Pilih Model yang Pas untuk Drop Bar Anda?",
@@ -122,6 +125,9 @@ window.AETH3RIUS.TRANSLATIONS = {
     priceMarketLabel: "Shopee · Tokopedia · TikTok",
     savePrefix: "Save",
     cardCta: "Choose Shop & Order",
+    photosLabel: (n) => `${n} Photos`,
+    prevPhoto: "Previous photo",
+    nextPhoto: "Next photo",
 
     conciergeEyebrow: "DIRECT CONCIERGE",
     conciergeTitle: "Not Sure Which Model Fits Your Drop Bar Setup?",

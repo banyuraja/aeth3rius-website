@@ -5,7 +5,7 @@
    1. Set your WhatsApp Business number in STORE_CONFIG.whatsappNumber
       (Indonesian international format without "+" or spaces, e.g. "6281234567890").
    2. Drop your logo / hero / product photos into the assets/ folders and
-      fill in the relative file paths below (leave "" to show studio placeholders).
+      fill in the relative file paths below (leave [] to show studio placeholders).
    3. Update directPrice (Toco & WhatsApp) and marketplacePrice (Shopee,
       Tokopedia, TikTok Shop) as plain integers in IDR — formatting and
       savings are calculated automatically.
@@ -48,8 +48,13 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Full Length",
     },
     isSpecial: false,
-    // Drop photo in assets/products/vertex-grips.jpg and set path below
-    image: "",
+    images: [
+      "assets/products/vertexgrips/VertexGrips-1.jpg",
+      "assets/products/vertexgrips/VertexGrips-2.jpg",
+      "assets/products/vertexgrips/VertexGrips-3.jpg",
+      "assets/products/vertexgrips/VertexGrips-4.jpg",
+      "assets/products/vertexgrips/VertexGrips-5.jpg",
+    ],
     illustration: "vertex",
     directPrice: 125000,      // Lower price on Toco & WhatsApp Business (IDR)
     marketplacePrice: 145000, // Standard price on Shopee, Tokopedia, TikTok Shop (IDR)
@@ -77,8 +82,13 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Full Length",
     },
     isSpecial: false,
-    // Drop photo in assets/products/apex-grips.jpg and set path below
-    image: "",
+    images: [
+      "assets/products/apexgrips/ApexGrips1.jpg",
+      "assets/products/apexgrips/ApexGrips2.jpg",
+      "assets/products/apexgrips/ApexGrips3.jpg",
+      "assets/products/apexgrips/ApexGrips4.jpg",
+      "assets/products/apexgrips/ApexGrips5.jpg",
+    ],
     illustration: "apex",
     directPrice: 135000,
     marketplacePrice: 155000,
@@ -106,8 +116,13 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Compact",
     },
     isSpecial: false,
-    // Drop photo in assets/products/short-vertex-grips.jpg and set path below
-    image: "",
+    images: [
+      "assets/products/shortvertexgrips/ShortVertexGrips1.jpg",
+      "assets/products/shortvertexgrips/ShortVertexGrips2.jpg",
+      "assets/products/shortvertexgrips/ShortVertexGrips3.jpg",
+      "assets/products/shortvertexgrips/ShortVertexGrips4.jpg",
+      "assets/products/shortvertexgrips/ShortVertexGrips5.jpg",
+    ],
     illustration: "short-vertex",
     directPrice: 105000,
     marketplacePrice: 120000,
@@ -135,8 +150,13 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Compact",
     },
     isSpecial: false,
-    // Drop photo in assets/products/short-apex-grips.jpg and set path below
-    image: "",
+    images: [
+      "assets/products/shortapexgrips/ShortApexGrips1.jpg",
+      "assets/products/shortapexgrips/ShortApexGrips2.jpg",
+      "assets/products/shortapexgrips/ShortApexGrips3.jpg",
+      "assets/products/shortapexgrips/ShortApexGrips4.jpg",
+      "assets/products/shortapexgrips/ShortApexGrips5.jpg",
+    ],
     illustration: "short-apex",
     directPrice: 115000,
     marketplacePrice: 130000,
@@ -164,8 +184,8 @@ window.AETH3RIUS.GRIP_CATALOG = [
       en: "Signature",
     },
     isSpecial: true,
-    // Drop photo in assets/products/devil-grips.jpg and set path below
-    image: "",
+    // Drop photos in assets/products/devilgrips/ and add paths here when ready
+    images: [],
     illustration: "devil",
     directPrice: 150000,
     marketplacePrice: 175000,
