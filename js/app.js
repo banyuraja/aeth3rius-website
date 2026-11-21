@@ -97,6 +97,11 @@
     return [];
   }
 
+  function getSavingsPercent(directPrice, marketplacePrice) {
+    if (!marketplacePrice || marketplacePrice <= directPrice) return 0;
+    return Math.round(((marketplacePrice - directPrice) / marketplacePrice) * 100);
+  }
+
   function isConfiguredUrl(url) {
     return typeof url === "string" && url.trim() !== "" && url.trim() !== "#";
   }
@@ -288,7 +293,7 @@
     GRIP_CATALOG.forEach((product) => {
       const images = getProductImages(product);
       const hasImages = images.length > 0;
-      const savings = Math.max(0, product.marketplacePrice - product.directPrice);
+      const savingsPercent = getSavingsPercent(product.directPrice, product.marketplacePrice);
       let currentCardSlide = 0;
 
       const card = document.createElement("article");
@@ -455,10 +460,10 @@
       const directValueGroup = document.createElement("span");
       directValueGroup.className = "price-value-group";
 
-      if (savings > 0) {
+      if (savingsPercent > 0) {
         const savingsBadge = document.createElement("span");
         savingsBadge.className = "savings-tag";
-        savingsBadge.textContent = `${dict.savePrefix} ${formatIDR(savings)}`;
+        savingsBadge.textContent = `${dict.savePrefix} ${savingsPercent}%`;
         directValueGroup.appendChild(savingsBadge);
       }
 
@@ -721,7 +726,7 @@
 
   function renderOrderModalContent(product) {
     const dict = t();
-    const savings = Math.max(0, product.marketplacePrice - product.directPrice);
+    const savingsPercent = getSavingsPercent(product.directPrice, product.marketplacePrice);
 
     modalEyebrow.textContent = `${dict.modalEyebrowPrefix} ${product.index} · ${product.badge[currentLang]}`;
     modalTitle.textContent = product.name;
@@ -734,8 +739,8 @@
     const directLabelEl = document.getElementById("modal-direct-group-label");
     if (directLabelEl) {
       directLabelEl.textContent =
-        savings > 0
-          ? `${dict.modalDirectGroup} (${dict.savePrefix} ${formatIDR(savings)})`
+        savingsPercent > 0
+          ? `${dict.modalDirectGroup} (${dict.savePrefix} ${savingsPercent}%)`
           : dict.modalDirectGroup;
     }
 
