@@ -77,9 +77,9 @@
 .lang-switch {
   display: inline-flex;
   align-items: center;
-  padding: 2px;
+  padding: 3px;
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   background: var(--bg-surface);
 }
 
@@ -92,7 +92,7 @@
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--ink-muted);
-  border-radius: 1px;
+  border-radius: 5px;
   transition: background-color var(--duration-fast) var(--ease-out),
               color var(--duration-fast) var(--ease-out);
 }
@@ -164,7 +164,7 @@ footer[id] {
   font-size: var(--text-sm);
   font-weight: 500;
   letter-spacing: 0.01em;
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
   transition: background-color var(--duration-fast) var(--ease-out),
               border-color var(--duration-fast) var(--ease-out),
@@ -239,7 +239,7 @@ footer[id] {
   aspect-ratio: 1 / 1;
   background: var(--bg-muted);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
@@ -332,7 +332,8 @@ footer[id] {
   padding: 1.4rem 1.5rem;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 .tier-panel--direct {
@@ -343,11 +344,10 @@ footer[id] {
 .tier-panel--direct::before {
   content: "";
   position: absolute;
-  inset-block: -1px;
-  left: -1px;
+  inset-block: 0;
+  left: 0;
   width: 3px;
   background: var(--accent-direct);
-  border-radius: var(--radius-xs) 0 0 var(--radius-xs);
 }
 
 .tier-panel-top {
@@ -471,7 +471,7 @@ footer[id] {
   flex-direction: column;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
   overflow: hidden;
   transition: border-color var(--duration-base) var(--ease-out),
               transform var(--duration-base) var(--ease-out);
@@ -679,7 +679,7 @@ footer[id] {
   padding: 1.6rem 1.5rem;
   background: var(--bg-muted);
   border: 1px dashed var(--border-strong);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
   gap: 1.5rem;
 }
 
@@ -736,7 +736,7 @@ footer[id] {
   max-height: calc(100dvh - 2rem);
   padding: 0;
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background: var(--bg-surface);
   color: var(--ink-primary);
   box-shadow: var(--shadow-modal);
@@ -796,7 +796,7 @@ footer[id] {
   width: 2.1rem;
   height: 2.1rem;
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   background: var(--bg-surface);
   color: var(--ink-secondary);
   font-size: 1.15rem;
@@ -827,7 +827,7 @@ footer[id] {
   padding: 0.9rem;
   background: var(--bg-canvas);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
 }
 
 .modal-thumb {
@@ -934,7 +934,7 @@ footer[id] {
   padding: 0.9rem 1rem;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   transition: border-color var(--duration-fast) var(--ease-out),
               background-color var(--duration-fast) var(--ease-out),
               transform var(--duration-fast) var(--ease-out);
@@ -1084,7 +1084,7 @@ footer[id] {
   color: var(--ink-primary);
   border: 1px solid var(--accent-direct-border);
   font-size: var(--text-sm);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-toast);
   transition: opacity var(--duration-fast) var(--ease-out),
               transform var(--duration-fast) var(--ease-out);
@@ -1144,7 +1144,7 @@ footer[id] {
     width: 100%;
     max-width: 100%;
     margin: auto 0 0 0;
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     border-bottom: 0;
     max-height: 90dvh;
     transform: translateY(24px);
