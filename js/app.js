@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Aeth3rius — Interactive Catalog, Bilingual State & Order Channel Modal
+   Aeth3rius — Interactive Catalog, Swipe Carousels & Order Channel Modal
    ========================================================================== */
 
 (function initAeth3rius() {
@@ -15,6 +15,10 @@
   let currentLang = getSavedLanguage();
   let activeProductId = null;
   let activeGalleryIndex = 0;
+  let activeModalTrack = null;
+  let activeModalCounter = null;
+  let activeModalThumbBtns = [];
+  let activeModalImagesCount = 0;
   let lastTriggerEl = null;
   let toastTimer = null;
 
@@ -111,6 +115,40 @@
     toastTimer = window.setTimeout(() => {
       toastEl.classList.remove("is-visible");
     }, 3400);
+  }
+
+  function createStudioPlaceholder(product) {
+    const placeholder = document.createElement("div");
+    placeholder.className = "studio-placeholder";
+
+    const topBar = document.createElement("div");
+    topBar.className = "studio-placeholder-top";
+
+    const idx = document.createElement("span");
+    idx.textContent = product.index;
+
+    const badge = document.createElement("span");
+    badge.className = `card-badge${product.isSpecial ? " card-badge--special" : ""}`;
+    badge.textContent = product.badge[currentLang];
+
+    topBar.append(idx, badge);
+
+    const artWrap = document.createElement("div");
+    artWrap.className = "studio-placeholder-art";
+    artWrap.innerHTML = ILLUSTRATIONS[product.illustration] || ILLUSTRATIONS.vertex;
+
+    const bottomBar = document.createElement("div");
+    bottomBar.className = "studio-placeholder-bottom";
+
+    const specLeft = document.createElement("span");
+    specLeft.textContent = product.name;
+
+    const specRight = document.createElement("span");
+    specRight.textContent = "1:1";
+
+    bottomBar.append(specLeft, specRight);
+    placeholder.append(topBar, artWrap, bottomBar);
+    return placeholder;
   }
 
   function attachOptionalImage(container, src, alt, eager) {
@@ -246,54 +284,124 @@
       const images = getProductImages(product);
       const hasImages = images.length > 0;
       const savings = Math.max(0, product.marketplacePrice - product.directPrice);
+      let currentCardSlide = 0;
 
       const card = document.createElement("article");
       card.className = "grip-card";
 
-      const trigger = document.createElement("button");
-      trigger.type = "button";
-      trigger.className = "grip-card-trigger";
-      trigger.setAttribute("aria-haspopup", "dialog");
-      trigger.addEventListener("click", () => openOrderModal(product.id, trigger));
+      // Semantic Body Trigger (created ahead so tapping a slide can pass focus back to it)
+      const bodyTrigger = document.createElement("button");
+      bodyTrigger.type = "button";
+      bodyTrigger.className = "grip-body-trigger";
+      bodyTrigger.setAttribute("aria-haspopup", "dialog");
+      bodyTrigger.addEventListener("click", () =>
+        openOrderModal(product.id, bodyTrigger, currentCardSlide)
+      );
 
-      // Media Container
+      // Media Container (1:1 Square — native horizontal swipe when multiple photos exist)
       const media = document.createElement("div");
-      media.className = `grip-media${hasImages ? " grip-media--photo" : ""}`;
-
-      const placeholder = document.createElement("div");
-      placeholder.className = "studio-placeholder";
-
-      const topBar = document.createElement("div");
-      topBar.className = "studio-placeholder-top";
-
-      const idx = document.createElement("span");
-      idx.textContent = product.index;
-
-      const badge = document.createElement("span");
-      badge.className = `card-badge${product.isSpecial ? " card-badge--special" : ""}`;
-      badge.textContent = product.badge[currentLang];
-
-      topBar.append(idx, badge);
-
-      const artWrap = document.createElement("div");
-      artWrap.className = "studio-placeholder-art";
-      artWrap.innerHTML = ILLUSTRATIONS[product.illustration] || ILLUSTRATIONS.vertex;
-
-      const bottomBar = document.createElement("div");
-      bottomBar.className = "studio-placeholder-bottom";
-
-      const specLeft = document.createElement("span");
-      specLeft.textContent = product.name;
-
-      const specRight = document.createElement("span");
-      specRight.textContent = "1:1";
-
-      bottomBar.append(specLeft, specRight);
-      placeholder.append(topBar, artWrap, bottomBar);
-      media.appendChild(placeholder);
+      media.className = `grip-media grip-media--clickable${hasImages ? " grip-media--photo" : ""}`;
 
       if (hasImages) {
-        attachOptionalImage(media, images[0], product.name, false);
+        const track = document.createElement("div");
+        track.className = "carousel-track";
+        track.setAttribute("role", "region");
+        track.setAttribute("aria-label", `${product.name} gallery`);
+
+        images.forEach((src, idx) => {
+          const slide = document.createElement("div");
+          slide.className = "carousel-slide";
+
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = `${product.name} — ${idx + 1} / ${images.length}`;
+          img.loading = idx === 0 ? "eager" : "lazy";
+          img.decoding = "async";
+          slide.appendChild(img);
+          track.appendChild(slide);
+        });
+
+        media.appendChild(track);
+        card.appendChild(media);
+
+        // Subtle pagination dots underneath the 1:1 photo (unobstructed artwork)
+        let dotButtons = [];
+        if (images.length > 1) {
+          const dotsWrap = document.createElement("div");
+          dotsWrap.className = "card-dots";
+
+          dotButtons = images.map((_, idx) => {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = `card-dot${idx === 0 ? " is-active" : ""}`;
+            dot.setAttribute("aria-label", `${product.name} ${idx + 1}`);
+            dot.setAttribute("aria-pressed", String(idx === 0));
+            dot.addEventListener("click", (event) => {
+              event.stopPropagation();
+              currentCardSlide = idx;
+              track.scrollTo({
+                left: idx * track.clientWidth,
+                behavior: "smooth",
+              });
+              dotButtons.forEach((b, bIdx) => {
+                b.classList.toggle("is-active", bIdx === idx);
+                b.setAttribute("aria-pressed", String(bIdx === idx));
+              });
+            });
+            dotsWrap.appendChild(dot);
+            return dot;
+          });
+
+          card.appendChild(dotsWrap);
+
+          let scrollRaf = 0;
+          track.addEventListener(
+            "scroll",
+            () => {
+              if (scrollRaf) return;
+              scrollRaf = window.requestAnimationFrame(() => {
+                scrollRaf = 0;
+                const width = track.clientWidth || 1;
+                const nextIdx = Math.max(
+                  0,
+                  Math.min(images.length - 1, Math.round(track.scrollLeft / width))
+                );
+                if (nextIdx !== currentCardSlide) {
+                  currentCardSlide = nextIdx;
+                  dotButtons.forEach((b, bIdx) => {
+                    b.classList.toggle("is-active", bIdx === nextIdx);
+                    b.setAttribute("aria-pressed", String(bIdx === nextIdx));
+                  });
+                }
+              });
+            },
+            { passive: true }
+          );
+        }
+
+        // Tap (without swiping) on the photo opens the modal at the active slide
+        let downScrollLeft = 0;
+        let downX = 0;
+        track.addEventListener(
+          "pointerdown",
+          (event) => {
+            downScrollLeft = track.scrollLeft;
+            downX = event.clientX;
+          },
+          { passive: true }
+        );
+
+        track.addEventListener("click", (event) => {
+          const movedScroll = Math.abs(track.scrollLeft - downScrollLeft);
+          const movedPointer = Math.abs(event.clientX - downX);
+          if (movedScroll < 8 && movedPointer < 10) {
+            openOrderModal(product.id, bodyTrigger, currentCardSlide);
+          }
+        });
+      } else {
+        media.appendChild(createStudioPlaceholder(product));
+        media.addEventListener("click", () => openOrderModal(product.id, bodyTrigger, 0));
+        card.appendChild(media);
       }
 
       // Card Body
@@ -385,8 +493,8 @@
       cta.append(ctaLabel, ctaArrow);
 
       body.append(header, priceStack, cta);
-      trigger.append(media, body);
-      card.appendChild(trigger);
+      bodyTrigger.appendChild(body);
+      card.appendChild(bodyTrigger);
       catalogGrid.appendChild(card);
     });
 
@@ -443,41 +551,86 @@
 
   /* ---------- Order Channel Modal (<dialog>) ---------- */
 
+  function syncModalGalleryIndicators(index) {
+    activeGalleryIndex = index;
+    if (activeModalCounter && activeModalImagesCount > 1) {
+      activeModalCounter.textContent = `${index + 1} / ${activeModalImagesCount}`;
+    }
+    activeModalThumbBtns.forEach((btn, idx) => {
+      const isActive = idx === index;
+      btn.classList.toggle("is-active", isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
+    });
+  }
+
+  function scrollModalGalleryTo(index, smooth) {
+    if (!activeModalTrack || activeModalImagesCount <= 0) return;
+    const clamped =
+      ((index % activeModalImagesCount) + activeModalImagesCount) % activeModalImagesCount;
+    syncModalGalleryIndicators(clamped);
+    const targetLeft = clamped * activeModalTrack.clientWidth;
+    if (smooth) {
+      activeModalTrack.scrollTo({ left: targetLeft, behavior: "smooth" });
+    } else {
+      activeModalTrack.scrollLeft = targetLeft;
+    }
+  }
+
   function renderModalPreview(product) {
     if (!modalPreview) return;
     modalPreview.textContent = "";
+    modalPreview.className = "modal-gallery-block";
+
+    activeModalTrack = null;
+    activeModalCounter = null;
+    activeModalThumbBtns = [];
 
     const dict = t();
     const images = getProductImages(product);
+    activeModalImagesCount = images.length;
+
+    const stage = document.createElement("div");
+    stage.className = `modal-gallery-stage${images.length === 0 ? " modal-gallery-stage--placeholder" : ""}`;
 
     if (images.length > 0) {
-      modalPreview.className = "modal-gallery-block";
       const safeIndex = Math.max(0, Math.min(activeGalleryIndex, images.length - 1));
       activeGalleryIndex = safeIndex;
 
-      const stage = document.createElement("div");
-      stage.className = "modal-gallery-stage";
+      const track = document.createElement("div");
+      track.className = "carousel-track";
+      track.setAttribute("role", "region");
+      track.setAttribute("aria-label", `${product.name} photos`);
 
-      const mainImg = document.createElement("img");
-      mainImg.src = images[safeIndex];
-      mainImg.alt = `${product.name} — ${safeIndex + 1} / ${images.length}`;
-      mainImg.decoding = "async";
-      stage.appendChild(mainImg);
+      images.forEach((src, idx) => {
+        const slide = document.createElement("div");
+        slide.className = "carousel-slide";
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = `${product.name} — ${idx + 1} / ${images.length}`;
+        img.decoding = "async";
+        slide.appendChild(img);
+        track.appendChild(slide);
+      });
+
+      stage.appendChild(track);
+      activeModalTrack = track;
 
       if (images.length > 1) {
         const counter = document.createElement("span");
         counter.className = "modal-gallery-counter";
         counter.textContent = `${safeIndex + 1} / ${images.length}`;
         stage.appendChild(counter);
+        activeModalCounter = counter;
 
+        // Desktop-only navigation arrows (hidden on phones/touch devices via CSS)
         const prevBtn = document.createElement("button");
         prevBtn.type = "button";
         prevBtn.className = "modal-gallery-nav modal-gallery-nav--prev";
         prevBtn.setAttribute("aria-label", dict.prevPhoto);
         prevBtn.textContent = "‹";
         prevBtn.addEventListener("click", () => {
-          activeGalleryIndex = (activeGalleryIndex - 1 + images.length) % images.length;
-          renderModalPreview(product);
+          scrollModalGalleryTo(activeGalleryIndex - 1, true);
         });
 
         const nextBtn = document.createElement("button");
@@ -486,11 +639,30 @@
         nextBtn.setAttribute("aria-label", dict.nextPhoto);
         nextBtn.textContent = "›";
         nextBtn.addEventListener("click", () => {
-          activeGalleryIndex = (activeGalleryIndex + 1) % images.length;
-          renderModalPreview(product);
+          scrollModalGalleryTo(activeGalleryIndex + 1, true);
         });
 
         stage.append(prevBtn, nextBtn);
+
+        let modalScrollRaf = 0;
+        track.addEventListener(
+          "scroll",
+          () => {
+            if (modalScrollRaf) return;
+            modalScrollRaf = window.requestAnimationFrame(() => {
+              modalScrollRaf = 0;
+              const width = track.clientWidth || 1;
+              const idx = Math.max(
+                0,
+                Math.min(images.length - 1, Math.round(track.scrollLeft / width))
+              );
+              if (idx !== activeGalleryIndex) {
+                syncModalGalleryIndicators(idx);
+              }
+            });
+          },
+          { passive: true }
+        );
       }
 
       modalPreview.appendChild(stage);
@@ -499,17 +671,14 @@
         const thumbs = document.createElement("div");
         thumbs.className = "modal-gallery-thumbs";
 
-        images.forEach((src, idx) => {
+        activeModalThumbBtns = images.map((src, idx) => {
           const thumbBtn = document.createElement("button");
           thumbBtn.type = "button";
           thumbBtn.className = `modal-thumb-btn${idx === safeIndex ? " is-active" : ""}`;
           thumbBtn.setAttribute("aria-label", `${product.name} ${idx + 1}`);
           thumbBtn.setAttribute("aria-pressed", String(idx === safeIndex));
           thumbBtn.addEventListener("click", () => {
-            if (activeGalleryIndex !== idx) {
-              activeGalleryIndex = idx;
-              renderModalPreview(product);
-            }
+            scrollModalGalleryTo(idx, true);
           });
 
           const thumbImg = document.createElement("img");
@@ -519,36 +688,15 @@
           thumbImg.decoding = "async";
           thumbBtn.appendChild(thumbImg);
           thumbs.appendChild(thumbBtn);
+          return thumbBtn;
         });
 
         modalPreview.appendChild(thumbs);
       }
-
-      const copyWrap = document.createElement("div");
-      copyWrap.className = "modal-preview-copy";
-
-      const desc = document.createElement("p");
-      desc.className = "modal-preview-desc";
-      desc.textContent = product.summary[currentLang];
-
-      const specs = document.createElement("p");
-      specs.className = "modal-preview-specs";
-      specs.textContent = product.specs[currentLang];
-
-      copyWrap.append(desc, specs);
-      modalPreview.appendChild(copyWrap);
-      return;
-    }
-
-    // Fallback compact preview for models without photos yet (e.g. Devil Grips)
-    modalPreview.className = "modal-product-preview";
-
-    const thumb = document.createElement("div");
-    thumb.className = "modal-thumb";
-    const svgWrap = document.createElement("div");
-    svgWrap.innerHTML = ILLUSTRATIONS[product.illustration] || ILLUSTRATIONS.vertex;
-    if (svgWrap.firstElementChild) {
-      thumb.appendChild(svgWrap.firstElementChild);
+    } else {
+      // Uniform 1:1 studio placeholder for models without photos yet (e.g. Devil Grips)
+      stage.appendChild(createStudioPlaceholder(product));
+      modalPreview.appendChild(stage);
     }
 
     const copyWrap = document.createElement("div");
@@ -563,7 +711,7 @@
     specs.textContent = product.specs[currentLang];
 
     copyWrap.append(desc, specs);
-    modalPreview.append(thumb, copyWrap);
+    modalPreview.appendChild(copyWrap);
   }
 
   function renderOrderModalContent(product) {
@@ -644,12 +792,12 @@
     );
   }
 
-  function openOrderModal(productId, triggerEl) {
+  function openOrderModal(productId, triggerEl, initialSlideIndex) {
     const product = GRIP_CATALOG.find((item) => item.id === productId);
     if (!product || !orderModal) return;
 
     activeProductId = product.id;
-    activeGalleryIndex = 0;
+    activeGalleryIndex = typeof initialSlideIndex === "number" ? initialSlideIndex : 0;
     lastTriggerEl = triggerEl || null;
     renderOrderModalContent(product);
 
@@ -657,6 +805,13 @@
       if (!orderModal.open) orderModal.showModal();
     } else {
       orderModal.setAttribute("open", "");
+    }
+
+    // Position the modal scroll-snap carousel cleanly at the selected slide after layout
+    if (activeModalTrack && activeGalleryIndex > 0) {
+      window.requestAnimationFrame(() => {
+        scrollModalGalleryTo(activeGalleryIndex, false);
+      });
     }
   }
 
@@ -684,21 +839,28 @@
     // Keyboard Left / Right gallery navigation while modal is open
     orderModal.addEventListener("keydown", (event) => {
       if (!activeProductId || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
-      const product = GRIP_CATALOG.find((item) => item.id === activeProductId);
-      if (!product) return;
-      const images = getProductImages(product);
-      if (images.length <= 1) return;
+      if (activeModalImagesCount <= 1) return;
       event.preventDefault();
-      activeGalleryIndex =
-        event.key === "ArrowRight"
-          ? (activeGalleryIndex + 1) % images.length
-          : (activeGalleryIndex - 1 + images.length) % images.length;
-      renderModalPreview(product);
+      scrollModalGalleryTo(
+        event.key === "ArrowRight" ? activeGalleryIndex + 1 : activeGalleryIndex - 1,
+        true
+      );
+    });
+
+    // Keep current slide aligned on viewport resize / orientation change
+    window.addEventListener("resize", () => {
+      if (orderModal.open && activeModalTrack && activeModalImagesCount > 1) {
+        activeModalTrack.scrollLeft = activeGalleryIndex * activeModalTrack.clientWidth;
+      }
     });
 
     orderModal.addEventListener("close", () => {
       activeProductId = null;
       activeGalleryIndex = 0;
+      activeModalTrack = null;
+      activeModalCounter = null;
+      activeModalThumbBtns = [];
+      activeModalImagesCount = 0;
       if (lastTriggerEl && typeof lastTriggerEl.focus === "function") {
         lastTriggerEl.focus();
       }
@@ -734,7 +896,13 @@
 
     if (activeProductId && orderModal?.open) {
       const activeProduct = GRIP_CATALOG.find((item) => item.id === activeProductId);
-      if (activeProduct) renderOrderModalContent(activeProduct);
+      if (activeProduct) {
+        const preservedIndex = activeGalleryIndex;
+        renderOrderModalContent(activeProduct);
+        window.requestAnimationFrame(() => {
+          scrollModalGalleryTo(preservedIndex, false);
+        });
+      }
     }
   }
 
