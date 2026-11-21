@@ -27,9 +27,9 @@
   align-items: center;
   gap: 0.65rem;
   font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
   color: var(--ink-primary);
 }
 
